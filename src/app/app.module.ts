@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { RoutingModule } from './routing/routing.module';
 import { HomeModule } from './home/home.module';
 import { StartModule } from './start/start.module';
+import { JstsModule } from './jsts/jsts.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { StartModule } from './start/start.module';
     SharedModule, 
     RoutingModule,
     HomeModule,
-    StartModule
+    StartModule,
+    JstsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

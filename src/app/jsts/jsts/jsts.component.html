@@ -1,0 +1,84 @@
+<!-- Extra notities voor programmeren HTML:
+{ en } = &#123; en &#125;
+-->
+
+<h1>Javascript en NodeJS</h1>
+<p>Tijdens dit hoofdstuk zullen wij de talen waarmee we een angular applicatie opbouwen bestuderen.</p>
+<hr>
+<h2>Nood aan typescript</h2>
+<p>Javascript is een geweldige taal, maar heeft enkele nadelen. Deze nadelen zorgen ervoor dat een applicatie op pure Javascript soms vrij ingewikkeld wordt. Hierom gebruiken wij bij Angular een combinatie van Javascript en Typescript.</p>
+<p>De voornaamste nadelen van Javascript zijn:</p>
+<ul>
+  <li>Grote projecten lezen als spaghetticode</li>
+  <li>Geen data types</li>
+  <li>Scope bepalen van stukken code is intewikkeld</li>
+</ul>
+<p>Hierom hebben wij een taal nodig die we kunnen transcompilen naar javascript.</p>
+<p>De oplossing: Typescript</p>
+<h2>Spelen met typescript</h2>
+<p>Een handige site voor het leren van typescript is <a href="http://www.typescriptlang.org/play/">http://www.typescriptlang.org/play/</a>. Op deze site kan je alle code die je nu gaat schrijven testen om zo je Typescript kennis te verbeteren.</p>
+<p>enkele voorbeelden van code zijn:</p>
+<table border="1px, solid, black" style="width:100%">
+  <tr>
+    <td width="50%">TS</td>
+    <td width="50%">JS</td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        var x: number;<br>
+        var y: number;<br>
+        x=1;<br>
+        y=2;
+      </p>
+    </td>
+    <td>
+      <p>
+        var x;<br>
+        var y;<br>
+        x=1;<br>
+        y=2;
+       </p>
+    </td>
+  </tr>
+  <tr>
+      <td>
+        <p>
+          function Addnumbers(x: number, y: number): number &#123;<br>
+          return x + y;&#125;	  
+        </p>
+      </td>
+      <td>
+        <p>
+          function Addnumbers(x,y) &#123;<br>
+          return x + y;&#125;
+         </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>
+            export class Calculator &#123;<br>
+            x: number;<br>
+            y: number;<br>
+            constructor(x: number, y: number) &#123;<br>
+            this.x = x;<br>
+            this.y = y;&#125;&#125;
+        </p>
+      </td>
+      <td>
+        <p>
+            define(["require", "exports"], function(require, exports) &#123;"use strict";<br>
+            Object.defineProperty(exports,"__esModule", &#123; value: true &#125;);<br>
+            var Calculator = /** @class */(function () &#123;<br>
+            function Calculator(x, y) &#123;<br>
+            this.x = x;<br>
+            this.y = y;&#125;<br>
+            return Calculator;&#125;());<br>
+          exports.Calculator = Calculator;&#125;);
+        </p>
+      </td>
+    </tr>
+</table>
+<p>Zoals je kan zien, als je applicatie groter wordt, wordt het ook lastiger en lastiger om met enkel Javascript te werken.</p>
+<h3>Gefeliciteerd met het voltooien van hoofdstuk 2</h3>
