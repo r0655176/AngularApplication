@@ -1,0 +1,17 @@
+<h2>New Component: {{title}}</h2>
+<p>Nu we de begrijpen hoe een angular component werkt gaan we een nieuw component aanmaken en we noemen het directive. 
+  Dit doen we via <span style="color:green;font-weight:bold">ng generate component directive</span>.</p>
+<p>Deze component wordt dan normaal toegevoegt aan app.module.ts als declaration. 
+  Dit betekend dat het directive component nu in heel de applicatie gemaakt kan worden.</p>
+<p>Ten slotte voegen we in app.component.html de code &lt;app-directives&gt;&lt;/app-directives&gt; toe. 
+  Deze zorgt ervoor dat de view van directive wordt toegevoegt op die locatie in het html bestand.</p>
+<p><i>Sidenote: In deze applicatie is alle code toegevoegd aan anatomie.module.ts en anatomie.component.html 
+  in plaats van app.module.ts en app.component.html. De reden hiervoor zien we in een later hoofdstuk. 
+  Alle code van dit onderdeel bevind zich in de component directive, zowel in deze applicatie als je eigen applicatie.</i></p>
+<!-- ngNonBindable is een extra functie die wij niet in deze cursus bekijken waarmee je ervoor zorgt dat er geen data opgehaald wordt. 
+  Hiermee kan ik er voor zorgen dat ik {{title}} kan laten zien zonder dat dit de title ophaald. -->
+<p ngNonBindable>
+  Om te beginnen moeten we leren hoe we data uit ons ts bestand naar html kunnen brengen. Dit is vrij eenvoudig.<br>
+  We starten met het toevoegen van een title aan het ts bestand van directive net zoals er bij app.component.ts al gedaan was.<br>
+  Hierna voegen we deze toe aan onze text in html via <span style="color:blue;font-weight:bold">&#123;&#123;title&#125;&#125;</span>.
+</p>

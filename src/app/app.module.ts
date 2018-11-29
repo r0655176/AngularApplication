@@ -9,6 +9,7 @@ import { RoutingModule } from './routing/routing.module';
 import { HomeModule } from './home/home.module';
 import { StartModule } from './start/start.module';
 import { JstsModule } from './jsts/jsts.module';
+import { AnatomieModule } from './anatomie/anatomie.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { JstsModule } from './jsts/jsts.module';
     RoutingModule,
     HomeModule,
     StartModule,
-    JstsModule
+    JstsModule,
+    AnatomieModule
   ],
   providers: [],
   bootstrap: [AppComponent]

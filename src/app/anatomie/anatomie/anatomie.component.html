@@ -1,0 +1,28 @@
+<h1>Angular Anatomie</h1>
+<p>Tijdens dit hoofdstuk zullen wij bekijken hoe we programmeren in Angular.</p>
+<hr>
+<h2>Angular Anatomie</h2>
+<img src="assets/images/drawing.png" width="40%">
+<p>Een Angular applicatie bestaat uit een mengeling van meerdere componenten die wij in de komende hoofdstukken gaan opbouwen.</p>
+<p>Deze componenten bestaan dan weer uit 3 delen: Een template, een class en metadata.</p>
+<p>Ga naar app.component.ts en zie het volgende:</p>
+<p><span style="color:blue;font-weight:bold">
+    import &#123; Component &#125; from '@angular/core';<br>
+    @Component(&#123;<br>
+    selector: 'app-root’,<br>
+    templateUrl: './app.component.html’,<br>
+    styleUrls: ['./app.component.css']<br>
+    &#125;)<br>
+    export class AppComponent &#123;<br>
+    title = 'HelloWorldAngular6';<br>
+    &#125;
+  </span>
+</p>
+<p>In de typescipt file staan zowel de metadata en de class properties.</p>
+<p>De metadata toont aan dat dit een component is en linkt de component aan het template (de html en css files).</p>
+<p>De class properties zijn de verschillende properties waarmee de component zal werken. Standaard zit hier de title al bij.</p>
+<p>Het template bepaalt hoe het component er uit ziet. De html en css files hiervan worden in de metadata gelinkt.</p>
+
+<app-directive></app-directive>
+
+<h3>Gefeliciteerd met het voltooien van hoofdstuk 3</h3>
