@@ -11,6 +11,11 @@ export class DirectiveComponent implements OnInit {
 
   constructor() { }
 
+  isNotLoremIpsum: boolean = true;
+  frameworks: string[] = ["Angular", "React", "Vue"];
+  klasses: string [] = ['blue','bold'];
+  score = 100;
+  rainbow: string [] = ['red','orange',"yellow","green","blue","indigo","violet"];
   ngOnInit() {
   }
 

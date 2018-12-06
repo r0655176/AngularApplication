@@ -1,10 +1,12 @@
 <h2>New Component: {{title}}</h2>
-<p>Nu we de begrijpen hoe een angular component werkt gaan we een nieuw component aanmaken en we noemen het directive. 
-  Dit doen we via <span style="color:green;font-weight:bold">ng generate component directive</span>.</p>
-<p>Deze component wordt dan normaal toegevoegt aan app.module.ts als declaration. 
-  Dit betekend dat het directive component nu in heel de applicatie gemaakt kan worden.</p>
-<p>Ten slotte voegen we in app.component.html de code &lt;app-directives&gt;&lt;/app-directives&gt; toe. 
-  Deze zorgt ervoor dat de view van directive wordt toegevoegt op die locatie in het html bestand.</p>
+<p>
+  Nu we de begrijpen hoe een angular component werkt gaan we een nieuw component aanmaken en we noemen het directive. 
+  Dit doen we via <span style="color:green;font-weight:bold">ng generate component directive</span>.<br>
+  Deze component wordt dan normaal toegevoegt aan app.module.ts als declaration. 
+  Dit betekend dat het directive component nu in heel de applicatie gemaakt kan worden.<br>
+  Ten slotte voegen we in app.component.html de code &lt;app-directives&gt;&lt;/app-directives&gt; toe. 
+  Deze zorgt ervoor dat de view van directive wordt toegevoegt op die locatie in het html bestand.
+</p>
 <p><i>Sidenote: In deze applicatie is alle code toegevoegd aan anatomie.module.ts en anatomie.component.html 
   in plaats van app.module.ts en app.component.html. De reden hiervoor zien we in een later hoofdstuk. 
   Alle code van dit onderdeel bevind zich in de component directive, zowel in deze applicatie als je eigen applicatie.</i></p>
@@ -15,3 +17,66 @@
   We starten met het toevoegen van een title aan het ts bestand van directive net zoals er bij app.component.ts al gedaan was.<br>
   Hierna voegen we deze toe aan onze text in html via <span style="color:blue;font-weight:bold">&#123;&#123;title&#125;&#125;</span>.
 </p>
+<p>
+  In angular kan men ook een ngClass aanmaken om hier dan verschillende ccs-eigenschappen aan te geven. <br>
+  Dit doet men via het attribuut [ngClass] toe te voegen aan bijvoorbeeld deze p-tag.<br>
+  Hierna voeg je in directive.ts ook deze klasse toe samen met de classen aangemaakt in de css file.<br>
+  Bijvoorbeeld in deze p-tag is er gebruik gemaakt van: <span [ngClass]="klasses">klasses: string [] = ['blue','bold'];</span>
+</p>
+<p>
+  Een volgende mogelijkheid van angular is if-statements te gebruiken op verschillende klassen via [ngIf].<br>
+  Een voorbeeld hiervan is: &lt;div *ngIf="isNotLoremIpsum"&gt;Voorbeeld&lt;/div&gt;<br>
+  Hierna voegt men in directive.ts code toe voor isLoremIpsum true of false te maken:<br>
+  isLoremIpsum: boolean = true;
+</p>
+<div *ngIf="isNotLoremIpsum; else andereTemplate">Deze text is een voorbeeld hiervan.</div>
+<ng-template #andereTemplate>
+  <p [ngClass]="klasses">Ipsum Lorem</p>
+</ng-template>
+<p>
+  Ook is er de mogelijkheid een else toe te voegen. Dit kan via ng-template.<br>
+  De code hierboven is hier al een voorbeeld van en is gecodeert via deze text:<br>
+  <span [ngClass]="klasses">
+    &lt;div *ngIf="isNotLoremIpsum; else anderTemplate"&gt;Deze text is een voorbeeld hiervan.&lt;/div&gt;<br>
+    &lt;ng-template #anderTemplate&gt;<br>
+    &lt;p [ngClass]="klasses"&gt;Ipsum Lorem&lt;/p&gt;<br>
+    &lt;/ng-template&gt;<br>
+  </span>
+</p>
+<p>
+  Vervolgens kunnen we ook angular gebruiken voor lijsten te maken van zelf ingegeven gegevens.<br>
+  Zo hebben wij bevoorbeeld in directive.ts deze lijst: <span [ngClass]="klasses">frameworks: string[] = ["Angular", "React", "Vue"];</span><br>
+  Hieronder maken we hieronder dan een lijst van deze frameworks via ngFor:<br>
+  <span [ngClass]="klasses" ngNonBindable>&lt;ol&gt;&lt;li *ngFor= "let frame of frameworks"&gt;{{frame}}&lt;/li&gt;&lt;/ol&gt;</span>
+</p>
+<ol>
+  <li *ngFor= "let frame of frameworks">{{frame}}</li>
+</ol>
+
+<!-- Oplossing Mini-Opdracht -->
+<p>Hiermee kunnen we leuke dingen doen zoals dit:</p>
+<p *ngFor="let color of rainbow" [ngStyle]="{ 'background-color': color, 'color': 'white'}">
+  {{color}}
+</p>  
+<p>Probeer dit nu zelf. De oplossing vind je in de code van deze applicatie als je ze kan vinden :P</p>
+
+<p>
+  Ten slotte kan je via angular ook een switch maken via [ngSwitch]<br>
+  In directive.ts maak je dan een element aan, bijvoorbeeld score.<br>
+  Daarna maak je de onderstaande switch aan via onderstaande code:<br>
+  <span [ngClass]="klasses" ngNonBindable>
+  &lt;div [ngSwitch]="score"&gt;<br>
+  &lt;p *ngSwitchCase="'0'"&gt;Oef, je score is 0&lt;/p&gt;<br>
+  &lt;p *ngSwitchCase="'50'"&gt;Oef, je score is 50: net geslaagd!&lt;/p&gt;<br>
+  &lt;p *ngSwitchCase="'100'"&gt;Super, je score is 100: prachtig gedaan!!&lt;/p&gt;<br>
+  &lt;p *ngSwitchDefault&gt;Je score is {{score}}.&lt;/p&gt;<br>
+  &lt;/div&lt;
+  </span>
+</p>
+
+<div [ngSwitch]="score">
+  <p *ngSwitchCase="'0'">Oef, je score is 0</p>
+  <p *ngSwitchCase="'50'">Oef, je score is 50: net geslaagd!</p>
+  <p *ngSwitchCase="'100'">Super, je score is 100: prachtig gedaan!!</p>
+  <p *ngSwitchDefault>Je score is {{score}}.</p>
+</div>
