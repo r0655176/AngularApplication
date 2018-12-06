@@ -10,6 +10,7 @@ import { HomeModule } from './home/home.module';
 import { StartModule } from './start/start.module';
 import { JstsModule } from './jsts/jsts.module';
 import { AnatomieModule } from './anatomie/anatomie.module';
+import { BindingModule } from './binding/binding.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AnatomieModule } from './anatomie/anatomie.module';
     HomeModule,
     StartModule,
     JstsModule,
-    AnatomieModule
+    AnatomieModule,
+    BindingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

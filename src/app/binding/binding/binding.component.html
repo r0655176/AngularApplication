@@ -1,3 +1,35 @@
-<p>
-  binding works!
+<h1>Databinding</h1>
+<p>Tijdens dit hoofdstuk zullen wij kennis maken met verschillende vormen van data binding.</p>
+<hr>
+<h2>Interpollation</h2>
+<p ngNonBindable>
+  Een eerste vorm van databinding is Interpollation. Dit hebben wij vorig hoofdstuk al deels gezien.
+  Bij interpollation halen we data op vanuit onze ts file via {{...}}. Dit is de eenvoudigste manier om data op te halen vanuit je applicatie.
 </p>
+<h2>Property  Binding</h2>
+<p>
+  Bij property binding gaan we ongeveer hetzelfde doen als bij interpollation. Alleen wordt de data nu als property gebruikt.<br>
+  Een voorbeeld hiervan is de onderstaande afbeelding:<br>
+  <span style="color:blue;font-weight:bold">&lt;img [src]='imageUrl' [alt]='imageAlt' /&gt;</span><br>
+  ImageAlt en ImageUrl zijn hierbij al ingegeven in de ts file op dezelfde manier als bij interpollation.<br>
+  <img [src]='imageUrl' [alt]='imageAlt' />
+</p>
+<h2>Event Binding</h2>
+<p>
+  Bij event binding gaan we een actie aanmaken op bijvoorbeeld een button die dan iets zal laten gebeuren in onze component.<br>
+  Om te beginnen maken we een event aan in onze component via de voorbeeldcode:<br>
+  <span style="color:blue;font-weight:bold">
+  onButtonClick() &#123;<br>
+    alert('Ya wanted an alert, mate;')<br>
+    &#125;<br>
+  </span>
+  Hierna maken we deze button aan via deze voorbeeldcode:<br>
+  <span style="color:blue;font-weight:bold">
+      &lt;button (click)="onButtonClick()"&gt;Alert?&lt;/button&gt;<br>
+  </span>
+ Ten slotte krijgen we dan deze button:
+</p>
+<button (click)="onButtonClick()">Alert?</button>
+<h3>Gefeliciteerd met het voltooien van hoofdstuk 4 </h3>
+<h3>Er zijn nu oefeningen beschikbaar op Toledo</h3>
+

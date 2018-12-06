@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BindingComponent implements OnInit {
 
+  title = 'Interpollation';
+  imageUrl= "https://angular.io/generated/images/guide/architecture/databinding.png";
+  imageAlt = "PropertyBinding";
+  onButtonClick() {
+    alert('Ya wanted an alert, mate?');
+  }
   constructor() { }
 
   ngOnInit() {
