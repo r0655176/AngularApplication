@@ -1,0 +1,55 @@
+<h1>Routing</h1>
+<p>Tijdens dit hoofdstuk zullen wij nagivatie in onze applicatie maken.</p>
+<hr>
+<h2>Routes</h2>
+<p>
+    In een applicatie moet er natuurlijk navigatie mogelijk zijn. Links op deze pagina staat er bijvoorbeeld een navigatiebalk
+    waarmee we op deze pagina komen. Dit kan in angular gemakkelijker via de @angular/router library.<br>
+    Voordat we starten maken we 3 nieuwe componenten aan: Home, Contact en Help.
+</p>
+<p>
+    Om te beginnen moeten we onze app module deze library importeren.<br>
+    Dit doen we via deze code:<br>
+    <span style="color:blue;font-weight:bold">
+        import &#123; Routes, RouterModule &#125; from '@angular/router';
+    </span>
+</p>
+<p>
+    Hierna voegen we routes toe de we linken naar onze verschillende componenten.<br>
+    <span style="color:blue;font-weight:bold">
+            const appRoutes: Routes = [<br>
+            &#123; path: '', component:HomeComponent &#125;,<br>
+            &#123; path: 'contact', component:ContactComponent &#125;,<br>
+            &#123; path: 'help', component:HelpComponent &#125;,<br>
+          ];
+    </span>
+</p>
+<p>
+    Ten slotte importeren we onder imports de routermodule met onze zelfgemaakte routes.<br>
+    <span style="color:blue;font-weight:bold">
+        RouterModule.forRoot(appRoutes, &#123;enableTracing: true&#125;)
+    </span>
+</p>
+<h2>Routing</h2>
+<p>
+    Nu we alle routes hebben gelegt kunnen we eenvoudig deze tonen.<br>
+    Via <span style="color:blue;font-weight:bold">&lt;router-outlet&gt;&lt;/router-outlet&gt;</span> kunnen we de component
+    dat we in de routes hebben meegegeven tonen. Op de startpagina is dit Home.<br>
+    Hierna maken we links naar deze aan via deze code:<br>
+    <span style="color:blue;font-weight:bold">
+        &lt;a routerLink="/" routerLinkActive="active"&gt;Home&lt;/a&gt;<br>
+        &lt;a routerLink="/contact" routerLinkActive="active"&gt;Contact&lt;/a&gt;<br>
+        &lt;a routerLink="/help" routerLinkActive="active"&gt;Help&lt;/a&gt;
+    </span>
+</p>
+<p>
+    De property routerLinkActive zorgt ervoor dat we kunnen zien of er op deze link geklikt is geweest.<br>
+    Een voorbeeld van deze link is:<br>
+    <a routerLink="/" routerLinkActive="active">Home</a>
+</p>
+<h2>Angular Material</h2>
+
+
+
+<h3>Gefeliciteerd met het voltooien van hoofdstuk 6</h3>
+

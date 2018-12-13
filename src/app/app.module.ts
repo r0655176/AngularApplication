@@ -12,6 +12,7 @@ import { JstsModule } from './jsts/jsts.module';
 import { AnatomieModule } from './anatomie/anatomie.module';
 import { BindingModule } from './binding/binding.module';
 import { ServiceModule } from './service/service.module';
+import { RoutinghomeModule } from './routinghome/routinghome.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ServiceModule } from './service/service.module';
     JstsModule,
     AnatomieModule,
     BindingModule,
-    ServiceModule
+    ServiceModule,
+    RoutinghomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
