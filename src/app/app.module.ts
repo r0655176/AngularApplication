@@ -11,6 +11,7 @@ import { StartModule } from './start/start.module';
 import { JstsModule } from './jsts/jsts.module';
 import { AnatomieModule } from './anatomie/anatomie.module';
 import { BindingModule } from './binding/binding.module';
+import { ServiceModule } from './service/service.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BindingModule } from './binding/binding.module';
     StartModule,
     JstsModule,
     AnatomieModule,
-    BindingModule
+    BindingModule,
+    ServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

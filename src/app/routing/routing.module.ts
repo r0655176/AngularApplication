@@ -5,6 +5,7 @@ import { StartComponent } from '../start/start/start.component';
 import { JstsComponent } from '../jsts/jsts/jsts.component';
 import { AnatomieComponent } from '../anatomie/anatomie/anatomie.component';
 import { BindingComponent } from '../binding/binding/binding.component';
+import { ServiceComponent } from '../service/service/service.component';
 
 const appRoutes: Routes = [
   { path: '', component:HomeComponent },
@@ -12,6 +13,7 @@ const appRoutes: Routes = [
   { path: '2', component:JstsComponent },
   { path: '3', component:AnatomieComponent },
   { path: '4', component:BindingComponent },
+  { path: '5', component:ServiceComponent },
 ];
 
 @NgModule({

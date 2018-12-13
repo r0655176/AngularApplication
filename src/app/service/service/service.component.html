@@ -1,0 +1,78 @@
+<h1>Services</h1>
+<p>Tijdens dit hoofdstuk zullen wij services opbouwen.</p>
+<hr>
+<h2>Services</h2>
+<img src="assets/images/drawing.png" width="40%">
+<p>Services zijn classes die verantwoordelijk zijn voor het uitvoeren van verschillende functies. In dit hoofdstuk bouwen wij een loggerservice.
+  Dit is een service die fouten logt naar de console.<br>
+  Om te beginnen maken we een folder voor deze service aan genaamt Services. 
+  Hierna maken we de service aan via doen we via <span style="color:green;font-weight:bold">ng generate service logger</span> in de Services Folder.
+</p>
+<p>
+  Deze service ziet er dan nu zo uit:<br>
+  <span style="color:blue;font-weight:bold">
+      import &#123; Injectable &#125; from '@angular/core';<br>
+      <br>
+      @Injectable(&#123;<br>
+        providedIn: 'root'<br>
+        &#125;)<br>
+      export class LoggerService &#123;<br>
+      <br>
+        constructor() &#123; &#125;<br>
+        &#125;<br>
+  </span>
+  Hierin zien we al code die ervoor zorgt dat de service op root niveau werkt en dus overal in de applicatie beschikbaar is.
+</p>
+<p>
+  Vervolgens moeten we deze nieuwe service geïnjecteerd worden in de constructor van onze component. Dit doen we zo:<br>
+  <span style="color:blue;font-weight:bold">
+  constructor(private _loggerService : LoggerService) &#123; &#125;<br>
+  </span>
+  Dependency Injection is een standaard onderdeel van elke applicatie in angular.
+  Je kan services ook, in plaats van op root niveau, deze op component of module niveau providen.<br>
+  Dit doe je door in de metadata (@Component of @NgModule) deze code toe te voegen:<br>
+  <span style="color:blue;font-weight:bold">
+      providers: [LoggerService],
+  </span>
+</p>
+<p>
+  Nu kunnen we in onze logger.service.ts code toevoegen voor verschillende functies uit te voeren.<br>
+  Enkele voorbeelden hiervan zijn:<br>
+  <span style="color:blue;font-weight:bold">
+    logError(pError: string) &#123;<br>
+      console.error(pError);<br>
+      &#125;<br>
+    logWarning(pWarn: string) &#123;<br>
+      console.warn(pWarn);<br>
+      &#125;<br>
+    logInfo(pInfo: string) &#123;<br>
+      console.info(pInfo);<br>
+      &#125;<br>
+  </span>
+</p>
+<p>
+  Nu we verschillende functies hebben kunnen we deze ook uittesten in ons component.<br>
+  Dit doen we in dit voorbeeld via event binding aan buttons:<br>
+  <span style="color:blue;font-weight:bold">
+    onAClickErr() &#123;<br>
+      this._loggerService.logError("Test!!")<br>
+      &#125;<br>
+    onAClickWar() &#123;<br>
+      this._loggerService.logWarning("Test!!")<br>
+      &#125;<br>
+    onAClickInfo() &#123;<br>
+      this._loggerService.logInfo("Test!!")<br>
+      &#125;<br>
+  </span>
+</p>
+<p>
+  Hieronder staan de 3 buttons die we hieraan hebben gelinkt:
+</p>
+<button (click)="onAClickErr()">Error!</button>
+<button (click)="onAClickWar()">Warning!</button>
+<button (click)="onAClickInfo()">Info?</button>
+<p>
+  Ten slotte kunnen we hier ook modellen aan linken. Dit zien we in de oefeningen bij dit hoofdstuk.
+</p>
+<h3>Gefeliciteerd met het voltooien van hoofdstuk 5</h3>
+<h3>Er zijn nu oefeningen beschikbaar op Toledo</h3>
