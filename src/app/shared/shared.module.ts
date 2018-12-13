@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatSidenavModule, MatListModule, MatCardModule, MatButtonModule } from '@angular/material';
+import { MatSidenavModule, MatListModule, MatCardModule, MatButtonModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -13,7 +13,8 @@ import { MatSidenavModule, MatListModule, MatCardModule, MatButtonModule } from 
     MatSidenavModule,
     MatListModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule, 
+    MatToolbarModule
   ],
   exports: [
     CommonModule,
@@ -23,7 +24,8 @@ import { MatSidenavModule, MatListModule, MatCardModule, MatButtonModule } from 
     MatSidenavModule,
     MatListModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule, 
+    MatToolbarModule
   ],
   declarations: []
 })

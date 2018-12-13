@@ -1,6 +1,7 @@
-<h1>Routing</h1>
+<mat-toolbar color="primary">
+        <h1>Routing</h1>
+</mat-toolbar>
 <p>Tijdens dit hoofdstuk zullen wij nagivatie in onze applicatie maken.</p>
-<hr>
 <h2>Routes</h2>
 <p>
     In een applicatie moet er natuurlijk navigatie mogelijk zijn. Links op deze pagina staat er bijvoorbeeld een navigatiebalk
@@ -8,12 +9,14 @@
     Voordat we starten maken we 3 nieuwe componenten aan: Home, Contact en Help.
 </p>
 <p>
-    Om te beginnen moeten we onze app module deze library importeren.<br>
+    Om te beginnen moeten we onze app module deze library importeren in onze appModule.<br>
     Dit doen we via deze code:<br>
     <span style="color:blue;font-weight:bold">
         import &#123; Routes, RouterModule &#125; from '@angular/router';
     </span>
 </p>
+<p><i>Sidenote: In deze applicatie is alle code toegevoegd aan routing.module.ts en shared.module.ts in plaats van app.module.ts. 
+    De reden hiervoor zien we in een later hoofdstuk. Ook zijn de voorbeelden niet toegepast in deze applicatie voor dezelfde reden.</i></p>
 <p>
     Hierna voegen we routes toe de we linken naar onze verschillende componenten.<br>
     <span style="color:blue;font-weight:bold">
@@ -48,8 +51,110 @@
     <a routerLink="/" routerLinkActive="active">Home</a>
 </p>
 <h2>Angular Material</h2>
-
-
-
+<p>
+    Via Angular Material kunnen we designcomponenten toevoegen aan onze applicatie.<br>
+    Wij gebruiken dit in deze applicatie voor de sidenav te maken.<br>
+    Om te beginnen moeten we alle libraries installeren via <span style="color:green;font-weight:bold">
+        npm install --save @angular/material @angular/cdk @angular/animations</span>
+</p>
+<p>
+    Vervolgens importeren we deze toe via de onderstaande code en voegen we deze toe aan de imports van appModule 
+    (en alle andere componenten waar we deze willen gebruiken).<br>
+    <span style="color:blue;font-weight:bold"> 
+        import &#123; MatSidenavModule, MatListModule, MatCardModule, MatButtonModule, MatToolbarModule &#125; from '@angular/material';
+    </span>
+</p>
+<p>
+    Ten slotte kunnen we in onze html een sidenav aanmaken. Dit doen we via deze code:<br>
+    <span style="color:blue;font-weight:bold"> 
+            &lt;mat-sidenav-container class="example-container"&gt;<br>
+            &lt;mat-sidenav #sidenav mode="side" opened="true"&gt;<br>
+            &lt;mat-nav-list&gt;<br>
+            &lt;a mat-list-item routerLink="/"&gt;Home&gt;/a&gt;<br>
+            &lt;a mat-list-item routerLink="/contact"&gt;Contact&lt;/a&gt;<br>
+            &lt;a mat-list-item routerLink="/help"&gt;Help&lt;/a&gt;<br>
+            &lt;/mat-nav-list&gt;<br>
+            &lt;/mat-sidenav&gt;<br>
+            &lt;mat-sidenav-content&gt;<br>
+            &lt;router-outlet&gt;&lt;/router-outlet&gt;<br>
+            &lt;/mat-sidenav-content&gt;<br>
+            &lt;/mat-sidenav-container&gt;<br>
+    </span>
+</p>
+<h2>Style</h2>
+<p>Een handige manier om een applicatie te verbeteren is om het een style te geven. De gemakkelijkste manier voor dit te doen is door
+    aan styles.css een standaarstyle toe te voegen. Voeg onderstaande code toe. Dit is een standaardstyle van angular material zelf.<br>
+    <span style="color:blue;font-weight:bold">
+        @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+    </span>
+</p>
+<p>
+    Ook kunnen we een style aanmaken in de css file van elke container. Een voorbeeld hiervan is 
+    de sidenav over heel de pagina de volledige hoogte maken. Dit doen we via de volgende code:<br>
+    <span style="color:blue;font-weight:bold">
+        .example-container &#123;<br>
+        position: absolute;<br>
+        top: 0;<br>
+        bottom: 0;<br>
+        left: 0;<br>
+        right: 0;<br>
+        &#125;
+    </span>
+</p>
+<p>
+    Ook is het mogelijk een eigen theme te maken. Hiervoor moet je eerst een nieuw bestand theme.scss aanmaken 
+    en aan angular.json onder styles toevoegen. Ook mag er geen style meer in styles.css staan.
+    In theme.scss. voegen we eerst deze code toe:<br>
+    <span style="color:blue;font-weight:bold">
+            @import '~@angular/material/theming';<br>
+            @include mat-core();<br>
+    </span>
+    Hiermee voegen we theming toe zodat we zelf themes kunnen maken en mat-core, waar de belangrijkste styles al in zitten.
+</p>
+<p>
+    Hierna kunnen we zelf kleurpaletten toevoegen via mat-palette:<br>
+    <span style="color:blue;font-weight:bold">
+            $helloworld-app-primary: mat-palette($mat-teal);<br>
+            $helloworld-app-accent: mat-palette($mat-amber, A200);<br>
+            $helloworld-app-warning: mat-palette($mat-red, 600);<br>
+            $helloworld-app-secondary: #607D8B;
+    </span>
+</p>
+<p>
+    Ten slotte bundelen we deze paletten in 1 theme en includen we deze in heel de applicatie:<br>
+    <span style="color:blue;font-weight:bold">
+            $helloworld-app-theme: mat-light-theme($helloworld-app-primary, $helloworld-app-accent, $helloworld-app-warning, );<br>
+            @include angular-material-theme($helloworld-app-theme);
+    </span>
+</p>
+<p>
+    Nu kunnen we deze kleuren overal in onze applicatie gebruiken. Als voorbeeld maken we een mat-card met mat-buttons aan.
+    Deze hebben wij eerder al geïmporteerd dus moeten we ze nu alleen nog maar uitschrijven via deze code:<br>
+    <span style="color:blue;font-weight:bold">
+            &lt;mat-card&gt;<br>
+            &lt;button mat-raised-button color="primary"&gt;<br>
+            Primary<br>
+            &lt;/button&gt;<br>
+            &lt;button mat-raised-button color="accent"&gt;<br>
+            Accent<br>
+            &lt;/button&gt;<br>
+            &lt;button mat-raised-button color="warn"&gt;<br>
+            Warning<br>
+            &lt;/button&gt;<br>
+            &lt;/mat-card&gt;
+    </span>
+</p>
+<mat-card>
+        <button mat-raised-button color="primary">
+                Primary
+              </button>
+              <button mat-raised-button color="accent">
+                Accent
+              </button>
+              <button mat-raised-button color="warn">
+                Warning
+              </button>
+</mat-card>
 <h3>Gefeliciteerd met het voltooien van hoofdstuk 6</h3>
+<h3>Er zijn nu oefeningen beschikbaar op Toledo</h3>
 
