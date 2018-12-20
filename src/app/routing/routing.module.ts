@@ -16,6 +16,7 @@ const appRoutes: Routes = [
   { path: '4', component:BindingComponent },
   { path: '5', component:ServiceComponent },
   { path: '6', component:RoutinghomeComponent },
+  { path: '7', loadChildren: '../modules/modules.module#ModulesModule' }
 ];
 
 @NgModule({

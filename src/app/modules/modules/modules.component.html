@@ -1,0 +1,76 @@
+<mat-toolbar color="primary">
+  <h1>Modules</h1>
+</mat-toolbar>
+<p>Tijdens dit hoofdstuk leren we hoe te werken met modules.</p>
+<h2>Modules</h2>
+<img src="assets/images/drawing.png" width="40%">
+<p>In dit hoofdstuk leren we werken met modules. Maar wat zijn modules nu eigenlijk?<br>
+Modules zijn groepen code die samenhangen op basis van domein of functionaliteit.<br>
+AppModule is hiervan de root module.
+</p>
+<p>
+  Nu gaan we onze eigen modules aanmaken.<br>
+  We gebruiken <span style="color:green;font-weight:bold">ng generate module home</span> om de nieuwe module aan te maken.<br>
+  Nu verplaatsen we onze homecomponent naar de module en voegen we deze toe aan declarations.<br>
+  Dit gebeurt automatisch wanneer we een component inmaken in een module.<br>
+  Hierna voegen we de homemodule toe aan de imports van onze appmodule en verwijderen we de homecomponent hieruit.
+</p>
+<p>
+  Indien alles nog werkt gaan we verder met het toevoegen van een contactmodule en een infomodule.
+</p>
+<h2>Sharing</h2>
+<p>
+  Indien we een groot project maken is het best practise om een shared module te maken.<br>
+  Hierin stop je alle imports die nodig zijn doorheen de applicatie.<br>
+  In deze plaatsen we bijvoorbeeld de CommonModule zodat deze niet overal moet geimporteerd worden.<br>
+  Ook is het eenvoudig de Angular Material Imports (of een extra module met deze) hieraan toe te voegen.<br>
+  Voeg deze allen toe aan zowel imports en exports en importeer deze shared module dan naar alle ander modules.
+</p>
+<h2>Routing Revisited</h2>
+<p>
+  Via modules kunnen we nu ook een Routing Module maken.<br>
+  Hierin kunnen we dan al onze appRoutes zetten.<br>
+  Deze moeten we dan wederom in onze appmodule importeren.<br>
+  Ook moeten we onze routermodule nu ook exporteren:<br>
+  <span style="color:blue;font-weight:bold">
+    @NgModule(&#123;<br>
+      imports: [RouterModule.forRoot(appRoutes, &#123;enableTracing: true&#125;)],<br>
+      exports: [RouterModule],<br>
+      declarations: []<br>
+    &#125;)
+  </span>
+</p>
+<p>
+  Ook is het best practise voor elke module een eigen routingmodule aanmaken.<br>
+  We maken voor contact een nieuwe module aan genaamt contactrouting.<br>
+  Hierin maken we dan terug routes aan:<br>
+  <span style="color:blue;font-weight:bold">
+    const appRoutes: Routes = [<br>
+    &#123; path: '', component:ContactComponent &#125;<br>
+  ];<br>
+  <br>
+  @NgModule(&#123;<br>
+  imports: [RouterModule.forChild(appRoutes)],<br>
+  exports: [RouterModule],<br>
+  declarations: []<br>
+  &#125;)<br>
+  </span>
+  Het verschil tussen dit en onze andere routingmodule is dat routing de root is en deze enkel voor 1 child.<br>
+  ten slotte verwijderen we de route naar contact uit de routingmodule en importeren we contactrouting in de contactmodule.
+</p>
+<p><i>Sidenote: In deze applicatie is alle code toegevoegd aan de modules module en aan modulesrouting in plaats van contact. 
+  Bij volgende hoofdstukken zal het ook altijd vermeld staan in welke module de opdracht is uitgevoert. 
+  Contact en Info bestaan niet in deze applicatie, home is een compleet andere pagina.  
+</i></p>
+<p>
+  Een voordeel van routing te doen via modules is Lazy Loading.<br>
+  Via lazy loading laden we de module pas wanneer we deze nodig hebben.<br>
+  We voegen aan routing deze route toe:<br>
+  <span style="color:blue;font-weight:bold">&#123; path: 'contact', loadChildren: '../contact/contact.module#ContactModule' &#125;</span><br>
+  Ten slotte verwijderen we de contactmodule uit de appmodule.
+</p>
+<p>
+  Ten slotte kunnen we ons project builden.<br>
+  Dit doen we via <span style="color:green;font-weight:bold">ng build --prod</span> en vinden we terug in de dist folder.
+</p>
+<h3>Gefeliciteerd met het voltooien van hoofdstuk 7</h3>
