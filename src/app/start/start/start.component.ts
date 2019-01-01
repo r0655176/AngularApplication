@@ -12,4 +12,6 @@ export class StartComponent implements OnInit {
   ngOnInit() {
   }
 
+  consoleclass: string [] = ['consoleclass','border'];
+  codeclass: string [] = ['codeclass','border'];
 }

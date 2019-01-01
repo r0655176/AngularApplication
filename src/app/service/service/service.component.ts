@@ -22,4 +22,7 @@ export class ServiceComponent implements OnInit {
   onAClickInfo() {
     this._loggerService.logInfo("Test!!")
   }
+
+  consoleclass: string [] = ['consoleclass','border'];
+  codeclass: string [] = ['codeclass','border'];
 }

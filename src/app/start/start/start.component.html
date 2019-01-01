@@ -4,21 +4,22 @@
 <p>Tijdens dit hoofdstuk zullen wij bekijken hoe we een angular applicatie aanmaken.</p>
 <h2>Project aanmaken</h2>
 <p>
-  We beginnen installeren van de Angular CLI via het commando <span style="color:green;font-weight:bold">npm install -g @angular/cli@latest</span>.<br>
+  We beginnen installeren van de Angular CLI via het commando <span [ngClass]="consoleclass">npm install -g @angular/cli@latest</span>.<br>
   Bij versie problemen volg de volgende stappen:
 </p>
-<ul style="color:green;font-weight:bold">
+<ul [ngClass]="consoleclass">
   <li>npm uninstall –g @angular/cli</li>
   <li>npm cache verify</li>
   <li>npm install -g @angular/cli@latest</li>
 </ul>
-<p>Vervolgens gaan we naar de map dat we een nieuw project willen aanmaken en gebruiken we het commando <span style="color:green;font-weight:bold">ng new HelloWorldAngular6</span>.</p>
+<p>Vervolgens gaan we naar de map dat we een nieuw project willen aanmaken en gebruiken we het commando <span [ngClass]="consoleclass">ng new HelloWorldAngular6</span>.</p>
 <ul>
     <li>ng: Angular CLI</li>
     <li>new: Nieuwe applicatie</li>
     <li>HelloWorldAngular6: zelfgekozen naam</li>
 </ul>
-<p>Ten slotte voeren we het commando <span style="color:green;font-weight:bold">ng serve</span> uit om onze applicatie op te starten. Surf hierna naar <a href="http://localhost:4200/">http://localhost:4200/</a> om de applicatie na te kijken.</p>
+<p>Ten slotte voeren we het commando <span [ngClass]="consoleclass">ng serve</span> 
+  uit om onze applicatie op te starten. Surf hierna naar <a href="http://localhost:4200/">http://localhost:4200/</a> om de applicatie na te kijken.</p>
 <h2>Eerste blik op Angular</h2>
 <ul>
   <li>package.json: configuratie van de applicatie en scripts die men kan uitvoeren</li>
@@ -26,7 +27,7 @@
   <li>tsconfig.json: typescript compiler</li>
   <li>e2e: alles rond end-to-end testing</li>
   <ul>
-    <li><span style="color:green;font-weight:bold">ng e2e</span> om end-to-end testen uit te voeren</li>
+    <li><span [ngClass]="consoleclass">ng e2e</span> om end-to-end testen uit te voeren</li>
   </ul>
   <li>node_modules: alle npm packages</li>
   <li>src: hieronder bevind zich de applicatie en zal je het meeste werken</li>

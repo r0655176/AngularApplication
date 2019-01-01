@@ -1,0 +1,263 @@
+<mat-toolbar color="primary">
+  <h1>Http</h1>
+</mat-toolbar>
+<p>In dit hoofdstuk leren wij communiceren via http en het gebruik van observables.</p>
+<h2>Http</h2>
+<p>
+  Om data via http op te halen moeten we eerst enkele dingen doen.<br>
+  We importeren eerst in onze SharedModule de HttpClientModule, FormsModule en ReactiveFormsModule van Angular.<br>
+  Hierna kunnen we aan two-way data binding doen.<br>
+  Ook maken we een nieuwe module en component aan genaamd film.
+</p>
+<p><i>Sidenote: In deze applicatie is alle code toegevoegd aan de http module in plaats van film.</i></p>
+<p>
+  We voegen nu aan de filmcomponent een string filmNaam toe: <span [ngClass]="codeclass">filmNaam: string;</span><br>
+  Ook voegen we aan onze html pagine een inputveld toe:<br>
+  <span [ngClass]="codeclass" ngNonBindable>
+      &lt;input type="text" placeholder="Film"<br>
+      [(ngModel)]="filmNaam"&gt;<br>
+      &lt;p&gt;&#123;&#123;filmNaam&#125;&#125;&lt;/p&gt;<br>
+  </span>
+</p>
+<input type="text" placeholder="Film"
+[(ngModel)]="filmNaam">
+<p>{{filmNaam}}</p>
+<p>
+  Vervolgens injecteren we in onze filmcomponent de httpclient: 
+  <span [ngClass]="codeclass">constructor(private _http : HttpClient) &#123;  &#125;</span><br>
+  Hierna voegen we een event toe aan onze component om films op te halen.<br>
+  Dit doen we zo:<br>
+  <span [ngClass]="codeclass">
+    response: any;<br>
+    zoekFilm() &#123;<br>
+      //API aanroepen<br>
+      this._http.get("http://www.omdbapi.com/?t=" + this.filmNaam + "&apikey=48cc3813")<br>
+        .subscribe(<br>
+          (res) => &#123;<br>
+            this.response = res;<br>
+            &#125;
+        );
+    &#125;<br>
+  </span>
+  Hiermee halen we een Observable op.
+</p>
+<p>
+  Een observable opent een continue communicatiekanaal met een datastroom (hier van IMDB API).<br>
+  Deze zal niets doen tot iemand zich er op subscribed.<br>
+  In deze subscribe wordt dan data opgehaald.
+</p>
+<p>
+  Ten slotte kunnen we nu een button maken die deze data ophaalt en toont via:<br>
+  <span [ngClass]="codeclass" ngNonBindable>
+  &lt;button mat-raised-button color="primary" (click)="zoekFilm()"&gt;Film zoeken 2.0&lt;/button&gt;<br>
+  &lt;p&gt;&#123;&#123;response | json&#125;&#125;&lt;/p&gt;
+  </span>
+</p>
+<input type="text" placeholder="Film"
+[(ngModel)]="filmNaam">
+<button mat-raised-button color="primary" (click)="zoekFilm()">Film zoeken 2.0</button>
+<p>{{response | json}}</p>
+
+<h2>Observables</h2>
+<p>
+  Voordat we zelf observables aanmaken moeten we eerst enkele zaken importeren.<br>
+  Importeer nu "Observable, of" uit rxjs en "map, filter, catchError" uit rxjs/operators.
+</p>
+<p>
+  Om te beginnen maken we een observable aan dat elke 1000 microseconden een willekeurig getal tussen 0 en 100 toont 
+  voor 15001 microseconden (15 maal):<br>
+  <span [ngClass]="codeclass" ngNonBindable>
+      obs$ = new Observable&lt;number&gt;(observer =&gt; &#123;<br>
+          setInterval(() =&gt; &#123;<br>
+            const rnd = Math.floor(Math.random() * 100);<br>
+            observer.next(rnd);<br>
+            &#125;, 1000);<br>
+            <br>
+          setTimeout(() =&gt; &#123;<br>
+            observer.complete();<br>
+            console.log('Observer stops on complete');<br>
+            &#125;, 15001);<br>
+            &#125;);<br>
+  </span>
+  Hierna kunnen we dan deze observable aanspreken via: 
+  <span [ngClass]="codeclass" ngNonBindable>&#123;&#123;obs$ | async&#125;&#125;</span>:
+</p>
+<p>
+  {{obs$ | async}}<br>
+  {{obs$ | async}}
+</p>
+<p>
+  Een andere manier om deze observable te gebruiken is via number aan te maken en deze in te vullen via een subscribtion:<br>
+  <span [ngClass]="codeclass">
+      subscription = this.obs$.subscribe(data =&gt; &#123;<br>
+        this.counter = data;<br>
+        &#125;);
+  </span>
+</p>
+<p>{{counter}}</p>
+<p>
+  Op onze observable kunnen we ook verdere bewerkingen op uitvoeren. Dit doen we via mapping:<br>
+  <span [ngClass]="codeclass">
+      subscriptionMap = this.obs$<br>
+    .pipe(<br>
+      map((c: number) =&gt; c * 100)<br>
+    )<br>
+    .subscribe(data =&gt; &#123;<br>
+      this.counterMap = data;<br>
+      &#125;);
+  </span>
+</p>
+<p>{{counterMap}}</p>
+<p>
+  Ook kunnen we ook nog filteren op verschillende waarden.<br>
+  Dit doen we via:<br>
+  <span [ngClass]="codeclass">
+      getallen$ = of(1, 2, 3, 4, 5)<br>
+      .pipe(<br>
+        filter(n =&gt; n % 2 !== 0)<br>
+      ).subscribe(x =&gt; console.log(x));<br>
+  </span>
+  Check nu de console.
+</p>
+<p>
+  Ten slotte kunnen we errorhandling toepassen op onze observables.<br>
+  Dit doen wij zo:<br>
+  <span [ngClass]="codeclass">
+      errorHandling$ = of(1,2,3,4,5)<br>
+      .pipe(<br>
+      map(test =&gt; &#123;<br>
+        if(test === 5) &#123; throw new Error('5 geeft een fout!');&#125;<br>
+        return test;<br>
+        &#125;)<br>
+      ).subscribe(<br>
+        result =&gt; console.log(result),<br>
+        err =&gt; console.log('Error: ' + err)<br>
+      );<br>
+  </span>
+  Check nu nogmaals de console.
+</p>
+<h2>Uitbreiding films</h2>
+<p>
+  Nu we beter met observables kunnen werken, kunnen we onze zoekFilm-event uitbreiden.<br>
+  We starten met het aanmaken van een FilmModel met title, director en acteurs.
+</p>
+<p>
+  Hierna maken we de event zoekSlimmeFilm aan en zorgen we ervoor dat deze enkel de data ophaalt dat we nodig hebben.<br>
+  Het resultaat ziet er dan zo uit:<br>
+  <span [ngClass]="codeclass">
+      zoekSlimmeFilm() &#123;<br>
+        //API aanroepen<br>
+        this._http.get("http://www.omdbapi.com/?t=" + this.filmNaam + "&apikey=48cc3813")<br>
+          .pipe(<br>
+            map((f:any) =&gt; &#123;<br>
+              return new FilmModel(f.Title, f.Director, f.Actors.split(", "))<br>
+            &#125;))<br>
+          .subscribe(<br>
+            (res) =&gt; &#123;<br>
+              this.filmModel = res;<br>
+            &#125; ); &#125;<br>
+  </span>
+  Ten slotte maken we terug een button en halen we het filmModel op via json.
+</p>
+<input type="text" placeholder="Film"
+[(ngModel)]="filmNaam">
+<button mat-raised-button color="primary" (click)="zoekSlimmeFilm()">Film zoeken 3.0</button>
+<p>{{filmModel | json}}</p>
+<h2>Post</h2>
+<p>
+  Ten slotte zien we ook hoe we data moeten submitten naar de server.<br>
+  Voor dit deel maken we gebruik van <a href="https://jsonplaceholder.typicode.com/">https://jsonplaceholder.typicode.com/</a>.
+  Hier kunnen we dummy http calls maken. Maar eerst moeten we terug een Model maken:<br>
+  <span [ngClass]="codeclass">
+      export class PostModel&#123;<br>
+        constructor(<br>
+            public title: String,<br>
+            public birector: String,<br>
+            public userId: number, <br>
+            public id?: number)&#123;&#125;&#125;
+  </span>
+</p>
+<p>
+  Nu kunnen we hierop verschillende acties uitvoeren.<br>
+  De 4 die wij bekijken zijn:
+</p>
+<ul>
+  <li>Post: Data ophalen</li>
+  <li>Put: Data updaten op basis van ID</li>
+  <li>Patch: Enkel data updaten waar de properties zijn aangepast</li>
+  <li>Delete: Data verwijderen</li>
+</ul>
+<p>
+  De code hiervoor voor deze events ziet er dan zo uit:<br>
+  <span [ngClass]="codeclass">
+      testPost() &#123;<br>
+        let postModel: PostModel =<br>
+          new PostModel("Test post", "Inhoud van de post", 1);<br>
+        this._http.post(<br>
+          "https://jsonplaceholder.typicode.com/posts",<br>
+          postModel<br>
+        )<br>
+          .subscribe(response =&gt;<br>
+            this.postResponse = response<br>
+          );<br>
+          &#125;<br>
+      testPut() &#123;<br>
+        let postModel: PostModel =<br>
+          new PostModel("Test put", "Inhoud van de put", 10, 1);<br>
+        this._http.put(<br>
+          "https://jsonplaceholder.typicode.com/posts/1",<br>
+          postModel<br>
+        )<br>
+          .subscribe(response =&gt;<br>
+            this.putResponse = response<br>
+          );<br>
+          &#125;<br>
+      testPatch() &#123;<br>
+        this._http.patch(<br>
+          "https://jsonplaceholder.typicode.com/posts/1",<br>
+          &#123;<br>
+            title: 'patch title'<br>
+          &#125;<br>
+        )<br>
+          .subscribe(response =&gt;<br>
+            this.patchResponse = response<br>
+          );<br>
+          &#125;<br>
+      testDelete() &#123;<br>
+        this._http.delete(<br>
+          "https://jsonplaceholder.typicode.com/posts/1"<br>
+        )<br>
+          .subscribe(response =&gt;<br>
+            this.deleteResponse = response<br>
+          );<br>
+          &#125;
+  </span>
+</p>
+  <p>
+    <button (click)="testPost()">Test Post</button>
+  </p>
+  <p>
+    {{postResponse | json}}
+  </p>
+  
+  <p>
+    <button (click)="testPut()">Test Put</button>
+  </p>
+  <p>
+    {{putResponse | json}}
+  </p>
+  
+  <p>
+    <button (click)="testPatch()">Test Patch</button>
+  </p>
+  <p>
+    {{patchResponse | json}}
+  </p>
+  
+  <p>
+    <button (click)="testDelete()">Test Delete</button>
+  </p>
+  <p>
+    {{deleteResponse | json}}
+  </p>
+<h3>Gefeliciteerd met het voltooien van hoofdstuk 8</h3>

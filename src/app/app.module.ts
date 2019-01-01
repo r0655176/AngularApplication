@@ -13,6 +13,7 @@ import { AnatomieModule } from './anatomie/anatomie.module';
 import { BindingModule } from './binding/binding.module';
 import { ServiceModule } from './service/service.module';
 import { RoutinghomeModule } from './routinghome/routinghome.module';
+import { HttpModule } from './http/http.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RoutinghomeModule } from './routinghome/routinghome.module';
     AnatomieModule,
     BindingModule,
     ServiceModule,
-    RoutinghomeModule
+    RoutinghomeModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AngularApp';
+
+  consoleclass: string [] = ['consoleclass','border'];
+  codeclass: string [] = ['codeclass','border'];
 }

@@ -12,4 +12,6 @@ export class RoutinghomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  consoleclass: string [] = ['consoleclass','border'];
+  codeclass: string [] = ['codeclass','border'];
 }

@@ -11,7 +11,7 @@
 <p>
     Om te beginnen moeten we onze app module deze library importeren in onze appModule.<br>
     Dit doen we via deze code:<br>
-    <span style="color:blue;font-weight:bold">
+    <span [ngClass]="codeclass">
         import &#123; Routes, RouterModule &#125; from '@angular/router';
     </span>
 </p>
@@ -19,7 +19,7 @@
     De reden hiervoor zien we in een later hoofdstuk. Ook zijn de voorbeelden niet toegepast in deze applicatie voor dezelfde reden.</i></p>
 <p>
     Hierna voegen we routes toe de we linken naar onze verschillende componenten.<br>
-    <span style="color:blue;font-weight:bold">
+    <span [ngClass]="codeclass">
             const appRoutes: Routes = [<br>
             &#123; path: '', component:HomeComponent &#125;,<br>
             &#123; path: 'contact', component:ContactComponent &#125;,<br>
@@ -29,17 +29,17 @@
 </p>
 <p>
     Ten slotte importeren we onder imports de routermodule met onze zelfgemaakte routes.<br>
-    <span style="color:blue;font-weight:bold">
+    <span [ngClass]="codeclass">
         RouterModule.forRoot(appRoutes, &#123;enableTracing: true&#125;)
     </span>
 </p>
 <h2>Routing</h2>
 <p>
     Nu we alle routes hebben gelegt kunnen we eenvoudig deze tonen.<br>
-    Via <span style="color:blue;font-weight:bold">&lt;router-outlet&gt;&lt;/router-outlet&gt;</span> kunnen we de component
+    Via <span [ngClass]="codeclass">&lt;router-outlet&gt;&lt;/router-outlet&gt;</span> kunnen we de component
     dat we in de routes hebben meegegeven tonen. Op de startpagina is dit Home.<br>
     Hierna maken we links naar deze aan via deze code:<br>
-    <span style="color:blue;font-weight:bold">
+    <span [ngClass]="codeclass">
         &lt;a routerLink="/" routerLinkActive="active"&gt;Home&lt;/a&gt;<br>
         &lt;a routerLink="/contact" routerLinkActive="active"&gt;Contact&lt;/a&gt;<br>
         &lt;a routerLink="/help" routerLinkActive="active"&gt;Help&lt;/a&gt;
@@ -54,19 +54,19 @@
 <p>
     Via Angular Material kunnen we designcomponenten toevoegen aan onze applicatie.<br>
     Wij gebruiken dit in deze applicatie voor de sidenav te maken.<br>
-    Om te beginnen moeten we alle libraries installeren via <span style="color:green;font-weight:bold">
+    Om te beginnen moeten we alle libraries installeren via <span [ngClass]="consoleclass">
         npm install --save @angular/material @angular/cdk @angular/animations</span>
 </p>
 <p>
     Vervolgens importeren we deze toe via de onderstaande code en voegen we deze toe aan de imports van appModule 
     (en alle andere componenten waar we deze willen gebruiken).<br>
-    <span style="color:blue;font-weight:bold"> 
+    <span [ngClass]="codeclass"> 
         import &#123; MatSidenavModule, MatListModule, MatCardModule, MatButtonModule, MatToolbarModule &#125; from '@angular/material';
     </span>
 </p>
 <p>
     Ten slotte kunnen we in onze html een sidenav aanmaken. Dit doen we via deze code:<br>
-    <span style="color:blue;font-weight:bold"> 
+    <span [ngClass]="codeclass"> 
             &lt;mat-sidenav-container class="example-container"&gt;<br>
             &lt;mat-sidenav #sidenav mode="side" opened="true"&gt;<br>
             &lt;mat-nav-list&gt;<br>
@@ -84,14 +84,14 @@
 <h2>Style</h2>
 <p>Een handige manier om een applicatie te verbeteren is om het een style te geven. De gemakkelijkste manier voor dit te doen is door
     aan styles.css een standaarstyle toe te voegen. Voeg onderstaande code toe. Dit is een standaardstyle van angular material zelf.<br>
-    <span style="color:blue;font-weight:bold">
+    <span [ngClass]="codeclass">
         @import "~@angular/material/prebuilt-themes/indigo-pink.css";
     </span>
 </p>
 <p>
     Ook kunnen we een style aanmaken in de css file van elke container. Een voorbeeld hiervan is 
     de sidenav over heel de pagina de volledige hoogte maken. Dit doen we via de volgende code:<br>
-    <span style="color:blue;font-weight:bold">
+    <span [ngClass]="codeclass">
         .example-container &#123;<br>
         position: absolute;<br>
         top: 0;<br>
@@ -105,7 +105,7 @@
     Ook is het mogelijk een eigen theme te maken. Hiervoor moet je eerst een nieuw bestand theme.scss aanmaken 
     en aan angular.json onder styles toevoegen. Ook mag er geen style meer in styles.css staan.
     In theme.scss. voegen we eerst deze code toe:<br>
-    <span style="color:blue;font-weight:bold">
+    <span [ngClass]="codeclass">
             @import '~@angular/material/theming';<br>
             @include mat-core();<br>
     </span>
@@ -113,7 +113,7 @@
 </p>
 <p>
     Hierna kunnen we zelf kleurpaletten toevoegen via mat-palette:<br>
-    <span style="color:blue;font-weight:bold">
+    <span [ngClass]="codeclass">
             $helloworld-app-primary: mat-palette($mat-teal);<br>
             $helloworld-app-accent: mat-palette($mat-amber, A200);<br>
             $helloworld-app-warning: mat-palette($mat-red, 600);<br>
@@ -122,7 +122,7 @@
 </p>
 <p>
     Ten slotte bundelen we deze paletten in 1 theme en includen we deze in heel de applicatie:<br>
-    <span style="color:blue;font-weight:bold">
+    <span [ngClass]="codeclass">
             $helloworld-app-theme: mat-light-theme($helloworld-app-primary, $helloworld-app-accent, $helloworld-app-warning, );<br>
             @include angular-material-theme($helloworld-app-theme);
     </span>
@@ -130,7 +130,7 @@
 <p>
     Nu kunnen we deze kleuren overal in onze applicatie gebruiken. Als voorbeeld maken we een mat-card met mat-buttons aan.
     Deze hebben wij eerder al geïmporteerd dus moeten we ze nu alleen nog maar uitschrijven via deze code:<br>
-    <span style="color:blue;font-weight:bold">
+    <span [ngClass]="codeclass">
             &lt;mat-card&gt;<br>
             &lt;button mat-raised-button color="primary"&gt;<br>
             Primary<br>

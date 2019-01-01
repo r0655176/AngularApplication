@@ -8,7 +8,7 @@
   Een Angular applicatie bestaat uit een mengeling van meerdere componenten die wij in de komende hoofdstukken gaan opbouwen.<br>
   Deze componenten bestaan dan weer uit 3 delen: Een template, een class en metadata.<br>
   Ga naar app.component.ts en zie het volgende:<br>
-  <span style="color:blue;font-weight:bold">
+  <span [ngClass]="codeclass">
     import &#123; Component &#125; from '@angular/core';<br>
     @Component(&#123;<br>
     selector: 'app-root’,<br>

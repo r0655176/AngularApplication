@@ -10,7 +10,7 @@ AppModule is hiervan de root module.
 </p>
 <p>
   Nu gaan we onze eigen modules aanmaken.<br>
-  We gebruiken <span style="color:green;font-weight:bold">ng generate module home</span> om de nieuwe module aan te maken.<br>
+  We gebruiken <span [ngClass]="consoleclass">ng generate module home</span> om de nieuwe module aan te maken.<br>
   Nu verplaatsen we onze homecomponent naar de module en voegen we deze toe aan declarations.<br>
   Dit gebeurt automatisch wanneer we een component inmaken in een module.<br>
   Hierna voegen we de homemodule toe aan de imports van onze appmodule en verwijderen we de homecomponent hieruit.
@@ -32,7 +32,7 @@ AppModule is hiervan de root module.
   Hierin kunnen we dan al onze appRoutes zetten.<br>
   Deze moeten we dan wederom in onze appmodule importeren.<br>
   Ook moeten we onze routermodule nu ook exporteren:<br>
-  <span style="color:blue;font-weight:bold">
+  <span [ngClass]="codeclass">
     @NgModule(&#123;<br>
       imports: [RouterModule.forRoot(appRoutes, &#123;enableTracing: true&#125;)],<br>
       exports: [RouterModule],<br>
@@ -44,7 +44,7 @@ AppModule is hiervan de root module.
   Ook is het best practise voor elke module een eigen routingmodule aanmaken.<br>
   We maken voor contact een nieuwe module aan genaamt contactrouting.<br>
   Hierin maken we dan terug routes aan:<br>
-  <span style="color:blue;font-weight:bold">
+  <span [ngClass]="codeclass">
     const appRoutes: Routes = [<br>
     &#123; path: '', component:ContactComponent &#125;<br>
   ];<br>
@@ -66,11 +66,11 @@ AppModule is hiervan de root module.
   Een voordeel van routing te doen via modules is Lazy Loading.<br>
   Via lazy loading laden we de module pas wanneer we deze nodig hebben.<br>
   We voegen aan routing deze route toe:<br>
-  <span style="color:blue;font-weight:bold">&#123; path: 'contact', loadChildren: '../contact/contact.module#ContactModule' &#125;</span><br>
+  <span [ngClass]="codeclass">&#123; path: 'contact', loadChildren: '../contact/contact.module#ContactModule' &#125;</span><br>
   Ten slotte verwijderen we de contactmodule uit de appmodule.
 </p>
 <p>
   Ten slotte kunnen we ons project builden.<br>
-  Dit doen we via <span style="color:green;font-weight:bold">ng build --prod</span> en vinden we terug in de dist folder.
+  Dit doen we via <span [ngClass]="consoleclass">ng build --prod</span> en vinden we terug in de dist folder.
 </p>
 <h3>Gefeliciteerd met het voltooien van hoofdstuk 7</h3>

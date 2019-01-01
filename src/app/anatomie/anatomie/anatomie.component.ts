@@ -12,4 +12,6 @@ export class AnatomieComponent implements OnInit {
   ngOnInit() {
   }
 
+  consoleclass: string [] = ['consoleclass','border'];
+  codeclass: string [] = ['codeclass','border'];
 }

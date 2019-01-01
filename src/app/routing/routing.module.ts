@@ -7,6 +7,7 @@ import { AnatomieComponent } from '../anatomie/anatomie/anatomie.component';
 import { BindingComponent } from '../binding/binding/binding.component';
 import { ServiceComponent } from '../service/service/service.component';
 import { RoutinghomeComponent } from '../routinghome/routinghome/routinghome.component';
+import { HttpComponent } from '../http/http/http.component';
 
 const appRoutes: Routes = [
   { path: '', component:HomeComponent },
@@ -16,7 +17,8 @@ const appRoutes: Routes = [
   { path: '4', component:BindingComponent },
   { path: '5', component:ServiceComponent },
   { path: '6', component:RoutinghomeComponent },
-  { path: '7', loadChildren: '../modules/modules.module#ModulesModule' }
+  { path: '7', loadChildren: '../modules/modules.module#ModulesModule' },
+  { path: '8', component:HttpComponent }
 ];
 
 @NgModule({

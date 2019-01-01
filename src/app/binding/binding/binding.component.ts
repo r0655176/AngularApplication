@@ -18,4 +18,6 @@ export class BindingComponent implements OnInit {
   ngOnInit() {
   }
 
+  consoleclass: string [] = ['consoleclass','border'];
+  codeclass: string [] = ['codeclass','border'];
 }

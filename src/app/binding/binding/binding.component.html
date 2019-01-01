@@ -11,7 +11,7 @@
 <p>
   Bij property binding gaan we ongeveer hetzelfde doen als bij interpollation. Alleen wordt de data nu als property gebruikt.<br>
   Een voorbeeld hiervan is de onderstaande afbeelding:<br>
-  <span style="color:blue;font-weight:bold">&lt;img [src]='imageUrl' [alt]='imageAlt' /&gt;</span><br>
+  <span [ngClass]="codeclass">&lt;img [src]='imageUrl' [alt]='imageAlt' /&gt;</span><br>
   ImageAlt en ImageUrl zijn hierbij al ingegeven in de ts file op dezelfde manier als bij interpollation.<br>
   <img [src]='imageUrl' [alt]='imageAlt' />
 </p>
@@ -19,13 +19,13 @@
 <p>
   Bij event binding gaan we een actie aanmaken op bijvoorbeeld een button die dan iets zal laten gebeuren in onze component.<br>
   Om te beginnen maken we een event aan in onze component via de voorbeeldcode:<br>
-  <span style="color:blue;font-weight:bold">
+  <span [ngClass]="codeclass">
   onButtonClick() &#123;<br>
     alert('Ya wanted an alert, mate;')<br>
     &#125;<br>
   </span>
   Hierna maken we deze button aan via deze voorbeeldcode:<br>
-  <span style="color:blue;font-weight:bold">
+  <span [ngClass]="codeclass">
       &lt;button (click)="onButtonClick()"&gt;Alert?&lt;/button&gt;<br>
   </span>
  Ten slotte krijgen we dan deze button:
