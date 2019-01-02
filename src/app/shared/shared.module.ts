@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule, MatListModule, MatCardModule, MatButtonModule, MatToolbarModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -15,6 +16,8 @@ import { MatSidenavModule, MatListModule, MatCardModule, MatButtonModule, MatToo
     MatCardModule,
     MatButtonModule, 
     MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule
 
   ],
   exports: [
@@ -26,7 +29,9 @@ import { MatSidenavModule, MatListModule, MatCardModule, MatButtonModule, MatToo
     MatListModule,
     MatCardModule,
     MatButtonModule, 
-    MatToolbarModule
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: []
 })

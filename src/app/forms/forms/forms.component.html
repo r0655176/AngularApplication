@@ -1,0 +1,192 @@
+<mat-toolbar color="primary">
+  <h1>Forms</h1>
+</mat-toolbar>
+<p>Tijdens dit hoofdstuk zullen wij bekijken hoe we forms kunnen opzetten in Angular.</p>
+<h2>Template Driven Forms</h2>
+<p>
+  Om met template driven forms te werken, gaan we wederom dingen moeten importeren in onze sharedmodule.<br>
+  We importeren hier de MatFormFieldModule en MatInputModule van angular material.<br>
+  Ook voegen we reactiveformsmodule toe voor het volgende onderdeel.<br>
+  Maak nu een nieuwe FormsModule aan en voeg deze toe aan onze applicatie.
+</p>
+<p>
+  Om te beginnen maken we weer een nieuw model aan: het StudentModel.<br>
+  Hierin komen een voornaam, naam en optioneel een klas.<br>
+  Hierna schrijven we een OnSubmit() event in onze component:<br>
+  <span [ngClass]="codeclass">
+      onSubmit()&#123;
+        console.log(this.model);
+        &#125;
+  </span>
+</p>
+<p>
+  Elke form-control heeft speciale classes die ervoor zorgen dat we de status ervan weten.<br>
+  Deze zijn: ng-untouched, ng-pristine en ng-valid<br>
+  Als er in de form-control iets gebeurt is, wordt ng-untouched ng-touched.<br>
+  Als er een waarde gewijzigd wordt, wordt ng-pristine ng-dirty.<br>
+  Als er een waarde niet geldig is, wordt ng-valid ng-invalid.
+</p>
+<p>
+  We bouwen nu het volgende form:<br>
+  <span [ngClass]="codeclass">
+      &lt;form&gt;<br>
+      &lt;p&gt;<br>
+      &lt;mat-form-field&gt;<br>
+      &lt;input matInput required placeholder="voornaam" id="voornaam" [(ngModel)]="model.voornaam" name="voornaam"&gt; <br>
+      &lt;/mat-form-field&gt;<br>
+      &lt;/p&gt;<br>
+      &lt;p&gt;<br>
+      &lt;mat-form-field&gt;<br>
+      &lt;input matInput required placeholder="naam"id="naam" [(ngModel)]="model.naam" name="naam"&gt;<br>
+      &lt;/mat-form-field&gt;<br>
+      &lt;/p&gt;<br>        
+      &lt;p&gt;<br>
+      &lt;button mat-raised-button color="primary" type="submit"&gt;Submit&lt;/button&gt;<br>
+      &lt;/p&gt;<br>
+      &lt;/form&gt;
+  </span>
+</p>
+<p>
+  Vervolgens maken we onze submitknop enkel beschikbaar als het form valid is.<br>
+  Dit doen we door een disabled voorwaarde toe te voegen aan onze submitbutton:<br>
+  <span [ngClass]="codeclass">
+      [disabled]="!studentForm.valid
+  </span>
+</p>
+<p>
+  Ook kunnen we nu validatie toevoegen op onze matInputs. Dit doen we op verschillende manieren.<br>
+  Enkele voorbeelden hiervan zijn:<br>
+  <span [ngClass]="codeclass">
+      required minlength="2" email
+  </span>
+</p>
+<p>
+  Ten slotte voegen we nog onze submit toe.<br>
+  Dit doen we door het form aan te passen:<br>
+  <span [ngClass]="codeclass">
+      &lt;form (ngSubmit)="onSubmit()" #studentForm="ngForm"&gt;<br>
+  </span>
+  Hieronder komt het eindresultaat:
+</p>
+
+<form (ngSubmit)="onSubmit()" #studentForm="ngForm">
+    <p>
+      <mat-form-field>
+      <input matInput required minlength="2" placeholder="voornaam" type="text" id="voornaam" [(ngModel)]="model.voornaam" name="voornaam"> 
+    </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+      <input matInput required email placeholder="naam" type="text" id="naam" [(ngModel)]="model.naam" name="naam">
+      </mat-form-field>
+    </p>
+  
+    <p>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!studentForm.valid">
+        Submit</button>
+    </p>
+  </form>
+
+  <h2>Reactive Forms</h2>
+  <p>
+    Een tweede manier om forms te maken is Model Driven.<br>
+    Hiermee maken we onze forms op naargelang ons model.<br>
+    We starten met het importeren van FormGroup, FormControl, FormBuilder en Validators.
+  </p>
+  <p>
+    Hierna starten we met het aanmaken van een formgroup:<br>
+    <span [ngClass]="codeclass">
+    student2Form = new FormGroup(&#123;<br>
+      voornaam: new FormControl("", Validators.required),<br>
+      naam: new FormControl("", Validators.required),<br>
+    &#125;);
+    </span>
+  </p>
+  <p>
+    Hierna maken we wederom ons form aan:<br>
+    <span [ngClass]="codeclass">
+        &lt;form (ngSubmit)="onSubmit2()" #student2Form="ngForm"&gt;<br>
+        &lt;p&gt;<br>
+        &lt;mat-form-field&gt;<br>
+        &lt;input matInput required minlength="2" placeholder="voornaam" type="text" id="voornaam" [(ngModel)]="model.voornaam" name="voornaam"&gt;<br>
+        &lt;/mat-form-field&gt;<br>
+        &lt;/p&gt;<br>
+        &lt;p&gt;<br>
+        &lt;mat-form-field&gt;<br>
+        &lt;input matInput required email placeholder="naam" type="text" id="naam" [(ngModel)]="model.naam" name="naam"&gt;<br>
+        &lt;/mat-form-field&gt;<br>
+        &lt;/p&gt;<br>
+        &lt;p&gt;<br>
+        &lt;button mat-raised-button color="primary" type="submit" [disabled]="!studentForm.valid"&gt;<br>
+                Submit&lt;/button&gt;<br>
+                &lt;/p&gt;<br>
+                &lt;/form&gt;
+    </span>
+  </p>
+
+  <form (ngSubmit)="onSubmit2()" #student2Form="ngForm">
+      <p>
+        <mat-form-field>
+        <input matInput required minlength="2" placeholder="voornaam" type="text" id="voornaam" [(ngModel)]="model.voornaam" name="voornaam"> 
+      </mat-form-field>
+      </p>
+      <p>
+          <mat-form-field>
+        <input matInput required email placeholder="naam" type="text" id="naam" [(ngModel)]="model.naam" name="naam">
+        </mat-form-field>
+      </p>
+    
+      <p>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!studentForm.valid">
+          Submit</button>
+      </p>
+    </form>
+
+    <p>
+      Een laatste mogelijkheid is het builden van een form via FormBuilder:<br>
+      <span [ngClass]="codeclass">
+          constructor(private fb: FormBuilder) &#123; &#125;<br>
+          <br>
+          student3Form = this.fb.group(&#123;<br>
+            voornaam: ["", Validators.required],<br>
+            naam: ["", Validators.required],<br>
+            &#125;);
+      </span>
+    </p>
+
+    <form (ngSubmit)="onSubmit3()" #student3Form="ngForm">
+        <p>
+            <mat-form-field>
+            <input matInput required minlength="2" placeholder="voornaam" type="text" id="voornaam" [(ngModel)]="model.voornaam" name="voornaam"> 
+          </mat-form-field>
+          </p>
+          <p>
+              <mat-form-field>
+            <input matInput required email placeholder="naam" type="text" id="naam" [(ngModel)]="model.naam" name="naam">
+            </mat-form-field>
+          </p>
+        
+          <p>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!studentForm.valid">
+              Submit</button>
+          </p>
+    </form>
+
+    <p>
+      Ten slotte is het ook nog mogelijk op een bepaalde value the subscriben. Hiermee kunnen we dan kijken of de value verandert.<br>
+      Dit doen we zo:<br>
+      <span [ngClass]="codeclass">
+          this.student2Form.valueChanges.subscribe(val =&gt; &#123;<br>
+            console.log(val.voornaam + " " + val.naam);<br>
+            &#125;);<br>
+            <br>
+          this.student2Form.get('voornaam').valueChanges.subscribe(val =&gt; &#123;<br>
+            console.log("Nieuwe waarde voornaam: " + val);<br>
+            &#125;)
+      </span>
+    </p>
+
+<span [ngClass]="codeclass"></span>
+<span [ngClass]="consoleclass"></span>
+
+<h3>Gefeliciteerd met het voltooien van hoofdstuk 9</h3>

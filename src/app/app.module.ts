@@ -14,6 +14,7 @@ import { BindingModule } from './binding/binding.module';
 import { ServiceModule } from './service/service.module';
 import { RoutinghomeModule } from './routinghome/routinghome.module';
 import { HttpModule } from './http/http.module';
+import { FormsModule } from './forms/forms.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HttpModule } from './http/http.module';
     BindingModule,
     ServiceModule,
     RoutinghomeModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
