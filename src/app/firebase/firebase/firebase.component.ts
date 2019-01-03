@@ -17,7 +17,7 @@ export class FirebaseComponent implements OnInit {
   editMode: boolean = false;
   teamToEdit: any = {};
 
-  constructor(private _teamsService: TeamsService, private _authService: AuthServiceService) { }
+  constructor(public _teamsService: TeamsService, public _authService: AuthServiceService) { }
 
   ngOnInit() {
     this.teams = this._teamsService.getTeams().snapshotChanges().pipe(
