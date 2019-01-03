@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+    <h1>Local Storage</h1>
+</mat-toolbar>
+<p>In dit hoofdstuk leren we weren met lokale storage.</p>
+<p>Local Storage</p>
+<p>
+  Local storage is een vrij eenvoudig onderwerp aangezien het geen speciale imports of packages nodig heeft.<br>
+  er zijn twee vormen van local storage:<br>
+  <span [ngClass]="codeclass">
+  localStorage.setItem("lastname", "Smith");
+  </span>
+   en 
+   <span [ngClass]="codeclass">
+      localStorage.getItem("lastname");
+   </span>
+</p>
+<p>
+  een eenvoudig voorbeeld is dit:
+</p>
+<input type="text" placeholder="Naam"
+[(ngModel)]="naam"><br>
+<button mat-raised-button color="primary" (click)="saveNaam()">Sla naam op</button><br>
+<button mat-raised-button color="primary" (click)="toonNaam()">Toon opgeslagen naam</button>
+<p>{{response}}</p>
+
+<h3>Gefeliciteerd met het voltooien van hoofdstuk 11</h3>

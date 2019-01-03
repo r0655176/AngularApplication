@@ -10,6 +10,7 @@ import { RoutinghomeComponent } from '../routinghome/routinghome/routinghome.com
 import { HttpComponent } from '../http/http/http.component';
 import { FormsComponent } from '../forms/forms/forms.component';
 import { FirebaseComponent } from '../firebase/firebase/firebase.component';
+import { StorageComponent } from '../storage/storage/storage.component';
 
 const appRoutes: Routes = [
   { path: '', component:HomeComponent },
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
   { path: '7', loadChildren: '../modules/modules.module#ModulesModule' },
   { path: '8', component:HttpComponent },
   { path: '9', component:FormsComponent },
-  { path: '10', component:FirebaseComponent }
+  { path: '10', component:FirebaseComponent },
+  { path: '11', component:StorageComponent }
 ];
 
 @NgModule({
