@@ -9,6 +9,5 @@
     font-weight: bold;
   }
   .border{
-    border: 1mm, black, inset;
     background-color: lightgrey;
   }

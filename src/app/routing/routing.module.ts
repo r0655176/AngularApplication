@@ -9,6 +9,7 @@ import { ServiceComponent } from '../service/service/service.component';
 import { RoutinghomeComponent } from '../routinghome/routinghome/routinghome.component';
 import { HttpComponent } from '../http/http/http.component';
 import { FormsComponent } from '../forms/forms/forms.component';
+import { FirebaseComponent } from '../firebase/firebase/firebase.component';
 
 const appRoutes: Routes = [
   { path: '', component:HomeComponent },
@@ -20,7 +21,8 @@ const appRoutes: Routes = [
   { path: '6', component:RoutinghomeComponent },
   { path: '7', loadChildren: '../modules/modules.module#ModulesModule' },
   { path: '8', component:HttpComponent },
-  { path: '9', component:FormsComponent }
+  { path: '9', component:FormsComponent },
+  { path: '10', component:FirebaseComponent }
 ];
 
 @NgModule({

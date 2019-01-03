@@ -18,7 +18,6 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule
-
   ],
   exports: [
     CommonModule,

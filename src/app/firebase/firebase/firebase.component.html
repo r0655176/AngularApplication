@@ -1,0 +1,236 @@
+<mat-toolbar color="primary">
+    <h1>Firebase</h1>
+</mat-toolbar>
+<p>In dit hoofdstuk leren we hoe we onze site moeten hosten via FireBase.</p>
+<h2>Firebase</h2>
+<p>
+  Firebase is een hostingservice met aangebouwde database en authentiaction van google om sites to hosten. 
+  Firebase is te vinden op <a src="https://firebase.google.com/">https://firebase.google.com/</a>. 
+  Hier moet je enkel inloggen met een google account, naar de console gaan en een nieuw project aanmaken. 
+</p>
+<p>
+  Om te beginnen moeten we firebase installeren in onze applicatie. <br>
+  Dit doen we via <span [ngClass]="consoleclass">npm install -g firebase-tools</span>.<br>
+  Hierna loggen we in via <span [ngClass]="consoleclass">firebase login</span> met onze google account.<br>
+  Dan gebruiken we <span [ngClass]="consoleclass">firebase init</span> om ons project the initialiseren.<br>
+  Hier kiezen we hosting.<br>
+  Daarna de naam van ons project.<br>
+  Bij public directory gewoon enter drukken.<br>
+  Ten slotte willen wij een Single Page Application.
+</p>
+
+<p>
+  Ten slotte moeten we nu enkel nog ons project builden via <span [ngClass]="consoleclass">ng build --prod</span>.<br>
+  Hierna deployen we alles uit public naar firebase via <span [ngClass]="consoleclass">firebase deploy</span>.
+</p>
+<h2>Cloud</h2>
+<p>
+  Nu onze site online staat, kunnen we een cloud database aanmaken en hierin data opslaan.<br>
+  Hiervoor moeten we eerst firebase installeren via <span [ngClass]="consoleclass">npm install @angular/fire firebase -save</span>.
+</p>
+<p>
+  Vervolgens gaan we naar projectinstellingen en voegen we de API Key toe aan src/environment/environmenten.ts zodat we kunnen verbinden met firebase.
+</p>
+<p>
+  Na deze stappen moeten we weer enkele zaken importeren in onze appmodule:
+</p>
+<ul>
+  <li>AngularFireModule uit @angular/fire</li>
+  <li>AngularFirestoreModule uit @angular/fire/firestore</li>
+  <li>environment uit src/environment/environmenten.ts</li>
+</ul>
+<p>
+  Deze initialiseren we dan via:<br>
+  <span [ngClass]="codeclass">
+  AngularFireModule.initializeApp(environment.firebase),<br>
+    AngularFirestoreModule,
+  </span>
+</p>
+<p>
+  Hierna maken we een nieuw model teams en een nieuwe service: teams.<br>
+  Het model bevat een id, naam en land.
+</p>
+<p>
+  In deze service schrijven we dan 4 functies weg:<br>
+  <span [ngClass]="codeclass">
+      teams: AngularFirestoreCollection&lt;Team>&gt;<br>
+      private teamDoc: AngularFirestoreDocument&lt;Team&gt;;<br>
+      <br>
+      constructor(private db: AngularFirestore) &#123; <br>
+        this.teams = db.collection&lt;Team&gt;(config.collection_endpoint);<br>
+        &#125;<br>
+        <br>
+      getTeams() : AngularFirestoreCollection&lt;Team&gt; &#123;<br>
+        return this.teams;<br>
+        &#125;<br>
+        <br>
+      addTeam(team: Team) &#123;<br>
+        this.teams.add(team);<br>
+        &#125;<br>
+        <br>
+      updateTeam(id, team: Team) &#123;<br>
+        //Team document ophalen<br>
+        this.teamDoc = this.db.doc&lt;Team&gt;(config.collection_endpoint + "/" + id);<br>
+        this.teamDoc.update(team);<br>
+        &#125;<br>
+        <br>
+      deleteTeam(id) &#123;<br>
+        //Team document ophalen<br>
+        this.teamDoc = this.db.doc&lt;Team&gt;(config.collection_endpoint + "/" + id);<br>
+        this.teamDoc.delete();<br>
+        &#125;
+    </span>
+</p>
+<p>
+  Hierna kunnen we deze binden in onze component:<br>
+  <span [ngClass]="codeclass">
+      teams: Observable&lt;Team[]&gt;;<br>
+          team = &#123; naam: null, land: null &#125; as Team;<br>
+          editMode: boolean = false;<br>
+          teamToEdit: any = &#123;&#125;;<br>
+          <br>
+          constructor(private _teamsService: TeamsService) &#123;&#125;<br>
+          <br>
+          ngOnInit() &#123;<br>
+            this.teams = this._teamsService.getTeams().snapshotChanges().pipe(<br>
+              map(actions => &#123;<br>
+                return actions.map(a => &#123;<br>
+                  //get document data<br>
+                  const data = a.payload.doc.data() as Team;<br>
+                  //get id<br>
+                  const id = a.payload.doc.id;<br>
+                  //combine id and data<br>
+                  return &#123; id, ...data &#125;;<br>
+                  &#125;)<br>
+                  &#125;)<br>
+            );<br>
+            &#125;<br>
+          <br>
+          edit(team: Team) &#123;<br>
+            this.teamToEdit = team;<br>
+            this.team = team;<br>
+            this.editMode = true;<br>
+            &#125;<br>
+            <br>
+          save() &#123;<br>
+            if (this.team.naam !== null && this.team.land !== null) &#123;<br>
+              if (!this.editMode) &#123;<br>
+                this._teamsService.addTeam(this.team);<br>
+                &#125; else &#123;<br>
+                //Get the id<br>
+                let teamId = this.teamToEdit.id;<br>
+                //update the task<br>
+                this._teamsService.updateTeam(teamId, this.team);<br>
+                &#125;<br>
+              //set edit mode to false and clear form<br>
+              this.editMode = false;<br>
+              this.team = &#123; naam: null, land: null &#125; as Team;<br>
+              &#125;<br>
+              &#125;<br>
+              <br>
+          delete(team) &#123;<br>
+            //Get the team id<br>
+            let teamId = team.id;<br>
+            //delete the team<br>
+            this._teamsService.deleteTeam(teamId);<br>
+            &#125;
+  </span>
+</p>
+<p>
+  Ten slotte voegen we deze nog toe aan onze html:<br>
+  <span [ngClass]="codeclass" ngNonBindable>
+      &lt;table&gt;<br>
+      &lt;tr *ngFor="let t of teams | async; let i = index" [attr.data-index]="i"&gt;<br>
+      &lt;td&gt;{{i + 1}}&lt;/td&gt;<br>
+      &lt;td&gt;{{t.naam}}&lt;/td&gt;<br>
+      &lt;td&gt;{{t.land}}&lt;/td&gt;<br>
+      &lt;td&gt;<br>
+      &lt;button mat-raised-button co  lor="primary" (click)="edit(t)"&gt;<br>
+                Edit<br>
+                &lt;/button&gt;<br>
+                &lt;/td&gt;<br>
+                &lt;td&gt;<br>
+                &lt;button mat-raised-button color="warn" (click)="delete(t)"&gt;<br>
+                Delete<br>
+                &lt;/button&gt;<br>
+                &lt;/td&gt;<br>
+                &lt;/tr&gt;<br>
+                &lt;/table&gt;<br>
+                <br>
+                &lt;form #f="ngForm"&lt;<br>
+                &lt;input [(ngModel)]="team.naam" name="naam" type="text" placeholder="mijn team" required&gt;<br>
+                &lt;input [(ngModel)]="team.land" name="land" type="text" placeholder="land" required&gt;<br>
+                &lt;button mat-raised-button color="primary" [disabled]="!f.valid" (click)="save()"&gt;<br>
+            Save<br>
+            &lt;/button&gt;<br>
+            &lt;/form&gt;<br>
+  </span>
+</p>
+
+<table>
+  <tr *ngFor="let t of teams | async; let i = index" [attr.data-index]="i">
+    <td>{{i + 1}}</td>
+    <td>{{t.naam}}</td>
+    <td>{{t.land}}</td>
+    <td>
+      <button mat-raised-button co  lor="primary" (click)="edit(t)">
+        Edit
+      </button>
+    </td>
+    <td>
+      <button mat-raised-button color="warn" (click)="delete(t)">
+        Delete
+      </button>
+    </td>
+  </tr>
+</table>
+
+<form #f="ngForm">
+  <input [(ngModel)]="team.naam" name="naam" type="text" placeholder="mijn team" required>
+  <input [(ngModel)]="team.land" name="land" type="text" placeholder="land" required>
+  <button mat-raised-button color="primary" [disabled]="!f.valid" (click)="save()">
+    Save
+  </button>
+</form>
+<h2>Firebase Authentication</h2>
+<p>
+  Via firebase kunnen we ook verbinden met facebook.<br>
+  Maak een account aan op <a src="https://developers.facebook.com/apps/">https://developers.facebook.com/apps/</a>.<br>
+  Hierna stel je in firebase een inlogmethode van facebook op.<br>
+  Ten slotte importeren we AngularFireAuthModule in onze appmodule.<br>
+  Ook maken we opnieuw een nieuwe service aan: AuthService:<br>
+  <span [ngClass]="codeclass">
+      private user: Observable&lt;firebase.User&gt;;<br>
+        <br>
+          constructor(public _afAuth: AngularFireAuth) &#123;<br>
+              this.user = _afAuth.authState;<br>
+              &#125;<br>
+              <br>
+          doFacebookLogin() &#123;<br>
+              return new Promise&lt;any&gt;((resolve, reject) =&gt; &#123;<br>
+                  let provider = new firebase.auth.FacebookAuthProvider();<br>
+                  this._afAuth.auth<br>
+                      .signInWithPopup(provider)<br>
+                      .then(res =&gt; &#123;<br>
+                          resolve(res);<br>
+                          &#125;, err =&gt; &#123;<br>
+                          console.log(err);<br>
+                          reject(err);<br>
+                          &#125;)<br>
+                          &#125;)<br>
+                          &#125;<br>
+                          <br>
+          doLogout() &#123;<br>
+              this._afAuth.auth.signOut().then(() =&gt; &#123;<br>
+                  //eventueel routen naar pagina<br>
+                  &#125;);<br>
+                  &#125;
+  </span>
+</p>
+<p>Deze moeten we dan enkel nog linken aan buttons en we hebben een facebook authenticator</p>
+<p><button (click)="loginFacebook()">Inloggen met Facebook</button></p>
+<p><button (click)="logout()">Uitloggen</button></p>
+<p>{{(_authService.user | async) | json}}</p>
+
+<h3>Gefeliciteerd met het voltooien van hoofdstuk 10</h3>
+

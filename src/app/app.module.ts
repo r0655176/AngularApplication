@@ -15,6 +15,11 @@ import { ServiceModule } from './service/service.module';
 import { RoutinghomeModule } from './routinghome/routinghome.module';
 import { HttpModule } from './http/http.module';
 import { FormsModule } from './forms/forms.module';
+import { FirebaseModule } from './firebase/firebase.module';
+import { AngularFireModule } from "@angular/fire"
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,11 @@ import { FormsModule } from './forms/forms.module';
     ServiceModule,
     RoutinghomeModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    FirebaseModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
